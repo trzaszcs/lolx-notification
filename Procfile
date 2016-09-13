@@ -1,0 +1,1 @@
+web: java $JVM_OPTS -cp target/lolx-notification-standalone.jar clojure.main -m lolx-notification.handler
