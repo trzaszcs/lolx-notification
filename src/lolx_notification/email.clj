@@ -16,4 +16,4 @@
        {:from from
         :to to
         :subject subject
-        :body [:aleternative {:type "text/html" :content html-content}]}))
+        :body [:aleternative {:type "text/html;charset=utf-8" :content html-content}]}))

@@ -5,7 +5,12 @@
 
 (hbs/set-template-url! (str (io/resource "templates")) ".html")
 
+(defonce templates 
+  {:reset {:subject "Resetowanie hasła"
+           :name "reset"}})
+
 (defn resolve 
   [type context]
-  {:subject "test"
-   :content (hbs/render-file "test" {})})
+  (if-let [template (get templates (keyword type))]
+    {:subject (:subject template)
+     :content (hbs/render-file (:name template) context)}))
