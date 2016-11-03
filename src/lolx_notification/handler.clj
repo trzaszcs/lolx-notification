@@ -2,6 +2,7 @@
   (:require [lolx-notification.email :as email]
             [lolx-notification.jwt :as jwt]
             [lolx-notification.template :as template]
+            [lolx-notification.clients :as clients]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [compojure.handler :refer [site]]
@@ -23,7 +24,6 @@
       (if (jwt/ok? jwt-token email-to)
         (if-let [template (template/resolve type context)]
           (do 
-            (println template)
             (email/send! email-to (template :subject) (template :content))
             {:status 201})
           {:status 404})
@@ -32,9 +32,23 @@
       )
     {:status 400}))
 
+(defn anounce-question
+  [request]
+  (if-let [jwt-token (extract-jwt (:headers request))]
+    (let [anounce-id (:id (request :params))]
+      (if (jwt/ok? jwt-token anounce-id)
+        (do
+          (:status 200)
+          )
+        {:status 401}
+        )
+      )
+    {:status 400}))
+
 (defroutes app-routes
   (GET "/" [] "Hello Lolx-Notification")
   (POST "/notify" []  notify)
+  (POST "/anounce-question/:id" []  anounce-question)
   (route/not-found "Not Found"))
 
 (def app
