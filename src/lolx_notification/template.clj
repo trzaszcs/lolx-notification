@@ -5,9 +5,10 @@
 
 (hbs/set-template-url! (str (io/resource "templates")) ".html")
 
-(defonce templates 
-  {:reset {:subject "Resetowanie hasła"
-           :name "reset"}})
+(defonce templates {
+  :reset {:subject "Resetowanie hasła" :name "reset"}
+  :chat  {:subject "Pytanie w sprawie oferty" :name "chat"}
+})
 
 (defn resolve 
   [type context]

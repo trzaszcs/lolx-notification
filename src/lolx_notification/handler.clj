@@ -22,8 +22,7 @@
     (let [{email-to :email context :context type :type} (request :body)]
       (if (jwt/ok? jwt-token email-to)
         (if-let [template (template/resolve type context)]
-          (do 
-            (println template)
+          (do
             (email/send! email-to (template :subject) (template :content))
             {:status 201})
           {:status 404})
