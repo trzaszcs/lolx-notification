@@ -7,7 +7,9 @@
 
 (defonce templates 
   {:reset {:subject "Resetowanie hasła"
-           :name "reset"}})
+           :name "reset"}}
+  :unread-messages {:subject "Masz nieprzeczytane wiadomości"
+                    :name "unread-messages"})
 
 (defn resolve 
   [type context]
