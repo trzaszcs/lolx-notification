@@ -2,6 +2,7 @@
   (:require [lolx-notification.email :as email]
             [lolx-notification.jwt :as jwt]
             [lolx-notification.template :as template]
+            [lolx-notification.clients :as clients]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [compojure.handler :refer [site]]
