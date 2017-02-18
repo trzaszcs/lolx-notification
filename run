@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "starting NOTIF - 8083"
+exec `lein ring server 8083`

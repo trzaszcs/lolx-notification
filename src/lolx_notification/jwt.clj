@@ -16,19 +16,18 @@
 (defonce rsa-prv-key (private-key (io/resource "rsa/key") "password"))
 
 (defn rsa-pub-key
-  [issuer] 
+  [issuer]
   (public-key (io/resource (str "rsa/" issuer ".pub"))))
 
 (defn ok?
   [jwt-token subject]
   (let [jwt (str->jwt jwt-token)
         issuer (get-in jwt [:claims :iss])]
-    (and 
+    (and
      (verify jwt (rsa-pub-key issuer))
-     (= subject (get-in jwt [:claims :sub]))) 
+     (= subject (get-in jwt [:claims :sub])))
     ))
 
 (defn produce
   [subject]
   (-> (build-claim subject) jwt (sign :RS256 rsa-prv-key) to-str))
-
