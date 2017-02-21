@@ -21,13 +21,16 @@
   [request]
   (if-let [jwt-token (extract-jwt (:headers request))]
     (let [{email-to :email context :context type :type} (request :body)]
-      (if (jwt/ok? jwt-token email-to)
-        (if-let [template (template/resolve type context)]
-          (do
-            (email/send! email-to (template :subject) (template :content))
-            {:status 201})
-          {:status 404})
-        {:status 401}
+      (if (and email-to type)
+        (if (jwt/ok? jwt-token email-to)
+          (if-let [template (template/resolve type context)]
+            (do
+              (email/send! email-to (template :subject) (template :content))
+              {:status 201})
+            {:status 404})
+          {:status 401}
+          )
+        {:status 400}
         )
       )
     {:status 400}))

@@ -6,11 +6,10 @@
 (hbs/set-template-url! (str (io/resource "templates")) ".html")
 
 (defonce templates
-  {
-   :reset {:subject "Resetowanie hasła"
-           :name "reset"}}
+  {:reset {:subject "Resetowanie hasła"
+           :name "reset"}
    :unread-messages {:subject "Masz nieprzeczytane wiadomości"
-                     :name "unread-messages"})
+                     :name "unread-messages"}})
 
 (defn resolve
   [type context]
