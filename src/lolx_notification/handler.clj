@@ -27,10 +27,10 @@
             (do
               (email/send! email-to (template :subject) (template :content))
               {:status 201})
-            {:status 404})
+            {:status 400 :body {:msg (str "unknown template " type)}})
           {:status 401}
           )
-        {:status 400}
+        {:status 400 :body {:msg "email and type is requied"}}
         )
       )
     {:status 400}))
