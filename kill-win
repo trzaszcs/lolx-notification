@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo "kill NOTIF - 8083"
+pid=`jps -lvm | grep notif | awk 'NR==1{print $1}'`
+taskkill /pid $pid /f
